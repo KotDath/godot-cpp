@@ -163,7 +163,7 @@ def scons_generate_bindings(target, source, env):
     return None
 
 
-platforms = ["linux", "macos", "windows", "android", "ios", "web"]
+platforms = ["linux", "macos", "windows", "android", "ios", "web", "auroraos"]
 
 # CPU architecture options.
 architecture_array = [

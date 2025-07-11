@@ -25,6 +25,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/linux.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macos.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/web.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/windows.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/auroraos.cmake)
 
 # Detect number of processors
 include(ProcessorCount)
@@ -39,6 +40,7 @@ set(PLATFORM_LIST
     android
     ios
     web
+    auroraos
 )
 
 # List of known architectures
@@ -183,6 +185,7 @@ function(godotcpp_options)
     macos_options()
     web_options()
     windows_options()
+    auroraos_options()
 endfunction()
 
 #[===========================[ Target Generation ]===========================]
@@ -283,6 +286,7 @@ function(godotcpp_generate)
         "$<$<PLATFORM_ID:Emscripten>:web>"
         "$<$<PLATFORM_ID:Windows>:windows>"
         "$<$<PLATFORM_ID:Msys>:windows>"
+        "$<$<PLATFORM_ID:AuroraOS>:auroraos>"
     )
 
     # Process CPU architecture argument.
@@ -386,5 +390,7 @@ function(godotcpp_generate)
         web_generate()
     elseif(CMAKE_SYSTEM_NAME STREQUAL Windows)
         windows_generate()
+    elseif(CMAKE_SYSTEM_NAME STREQUAL AuroraOS)
+        auroraos_generate()
     endif()
 endfunction()
