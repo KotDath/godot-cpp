@@ -182,6 +182,8 @@ architecture_aliases = {
     "x64": "x86_64",
     "amd64": "x86_64",
     "armv7": "arm32",
+    "armv7l": "arm32",
+    "armv7hl": "arm32",
     "armv8": "arm64",
     "arm64v8": "arm64",
     "aarch64": "arm64",
@@ -500,8 +502,14 @@ def generate(env):
     env["OBJSUFFIX"] = suffix + env["OBJSUFFIX"]
 
     # compile_commands.json
-    env.Tool("compilation_db")
-    env.Alias("compiledb", env.CompilationDatabase(normalize_path(env["compiledb_file"], env)))
+    try:
+        env.Tool("compilation_db")
+        env.Alias("compiledb", env.CompilationDatabase(normalize_path(env["compiledb_file"], env)))
+    except Exception:
+        # compilation_db tool not available in older SCons versions (< 4.0)
+        print("Warning: compilation_db tool not available in this SCons version. compile_commands.json will not be generated.")
+        # Create a dummy alias to prevent errors when compiledb=true is used
+        env.Alias("compiledb", [])
 
     # Formatting
     if not env["verbose"]:

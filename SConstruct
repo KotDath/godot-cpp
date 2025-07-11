@@ -2,7 +2,7 @@
 
 import os
 
-EnsureSConsVersion(4, 0)
+EnsureSConsVersion(3, 0, 5)
 
 
 try:
