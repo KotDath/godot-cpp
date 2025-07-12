@@ -3,9 +3,9 @@
 		"version_major": 4,
 		"version_minor": 4,
 		"version_patch": 1,
-		"version_status": "stable",
-		"version_build": "official",
-		"version_full_name": "Godot Engine v4.4.1.stable.official"
+		"version_status": "rc",
+		"version_build": "custom_build",
+		"version_full_name": "Godot Engine v4.4.1.rc.custom_build"
 	},
 	"builtin_class_sizes": [
 		{
@@ -87534,6 +87534,13 @@
 			"api_type": "editor"
 		},
 		{
+			"name": "EditorExportPlatformAuroraOS",
+			"is_refcounted": true,
+			"is_instantiable": true,
+			"inherits": "EditorExportPlatform",
+			"api_type": "editor"
+		},
+		{
 			"name": "EditorExportPlatformExtension",
 			"is_refcounted": true,
 			"is_instantiable": true,
@@ -165924,10 +165931,6 @@
 					"value": 1011
 				},
 				{
-					"name": "NOTIFICATION_WM_POSITION_CHANGED",
-					"value": 1012
-				},
-				{
 					"name": "NOTIFICATION_OS_MEMORY_WARNING",
 					"value": 2009
 				},
@@ -174697,7 +174700,7 @@
 			"is_refcounted": false,
 			"is_instantiable": true,
 			"inherits": "PanelContainer",
-			"api_type": "editor",
+			"api_type": "core",
 			"methods": [
 				{
 					"name": "get_binding_modifier",
@@ -176930,14 +176933,14 @@
 			"is_refcounted": false,
 			"is_instantiable": true,
 			"inherits": "OpenXRInteractionProfileEditorBase",
-			"api_type": "editor"
+			"api_type": "core"
 		},
 		{
 			"name": "OpenXRInteractionProfileEditorBase",
 			"is_refcounted": false,
 			"is_instantiable": false,
 			"inherits": "HBoxContainer",
-			"api_type": "editor",
+			"api_type": "core",
 			"methods": [
 				{
 					"name": "setup",
@@ -218769,64 +218772,8 @@
 							"value": 217
 						},
 						{
-							"name": "DATA_FORMAT_ASTC_4x4_SFLOAT_BLOCK",
-							"value": 218
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_5x4_SFLOAT_BLOCK",
-							"value": 219
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_5x5_SFLOAT_BLOCK",
-							"value": 220
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_6x5_SFLOAT_BLOCK",
-							"value": 221
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_6x6_SFLOAT_BLOCK",
-							"value": 222
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_8x5_SFLOAT_BLOCK",
-							"value": 223
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_8x6_SFLOAT_BLOCK",
-							"value": 224
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_8x8_SFLOAT_BLOCK",
-							"value": 225
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_10x5_SFLOAT_BLOCK",
-							"value": 226
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_10x6_SFLOAT_BLOCK",
-							"value": 227
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_10x8_SFLOAT_BLOCK",
-							"value": 228
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_10x10_SFLOAT_BLOCK",
-							"value": 229
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_12x10_SFLOAT_BLOCK",
-							"value": 230
-						},
-						{
-							"name": "DATA_FORMAT_ASTC_12x12_SFLOAT_BLOCK",
-							"value": 231
-						},
-						{
 							"name": "DATA_FORMAT_MAX",
-							"value": 232
+							"value": 218
 						}
 					]
 				},
