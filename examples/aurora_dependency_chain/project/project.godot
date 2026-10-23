@@ -1,0 +1,11 @@
+config_version=5
+
+[application]
+config/name="Aurora GDExtension dependency probe"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/mode=2
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

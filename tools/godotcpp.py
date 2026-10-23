@@ -179,7 +179,7 @@ def scons_generate_bindings(target, source, env):
 
 supported_api_versions = ["4.3", "4.4", "4.5", "4.6", "4.7", "4.8"]
 
-platforms = ["linux", "macos", "windows", "android", "ios", "web"]
+platforms = ["linux", "macos", "windows", "android", "ios", "web", "auroraos"]
 
 # CPU architecture options.
 architecture_array = [

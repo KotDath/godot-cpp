@@ -1,0 +1,13 @@
+[configuration]
+entry_symbol = "aurora_probe_init"
+compatibility_minimum = "4.7"
+
+[libraries]
+linux.x86_64 = "res://bin/x86_64/libaurora_probe.so"
+auroraos.arm32 = "res://bin/arm32/libaurora_probe.so"
+auroraos.arm64 = "res://bin/arm64/libaurora_probe.so"
+
+[dependencies]
+linux.x86_64 = {"res://bin/x86_64/libaurora_probe_middle.so": "", "res://bin/x86_64/libaurora_probe_leaf.so": ""}
+auroraos.arm32 = {"res://bin/arm32/libaurora_probe_middle.so": "", "res://bin/arm32/libaurora_probe_leaf.so": ""}
+auroraos.arm64 = {"res://bin/arm64/libaurora_probe_middle.so": "", "res://bin/arm64/libaurora_probe_leaf.so": ""}

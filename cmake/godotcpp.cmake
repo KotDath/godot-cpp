@@ -22,6 +22,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/common_compiler_flags.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/android.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ios.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/linux.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/auroraos.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macos.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/web.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/windows.cmake)
@@ -33,6 +34,7 @@ message(STATUS "Auto-detected ${PROC_MAX} CPU cores available for build parallel
 
 # List of known platforms
 set(PLATFORM_LIST
+    auroraos
     linux
     macos
     windows
@@ -205,6 +207,7 @@ function(godotcpp_options)
 
     #[[ Target Platform Options ]]
     android_options()
+    option(GODOTCPP_AURORAOS "Target Aurora OS with its SDK toolchain" OFF)
     ios_options()
     linux_options()
     macos_options()
@@ -335,6 +338,9 @@ function(godotcpp_generate)
     )
 
     # Process CPU architecture argument.
+    if(GODOTCPP_AURORAOS)
+        set(SYSTEM_NAME "auroraos")
+    endif()
     godot_arch_name( ARCH_NAME )
 
     # Transform options into generator expressions
@@ -428,7 +434,9 @@ function(godotcpp_generate)
             FOLDER "godot-cpp"
     )
     # gersemi: on
-    if(CMAKE_SYSTEM_NAME STREQUAL Android)
+    if(GODOTCPP_AURORAOS)
+        auroraos_generate()
+    elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
         android_generate()
     elseif(CMAKE_SYSTEM_NAME STREQUAL iOS)
         ios_generate()

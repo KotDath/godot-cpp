@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import os
+
+root = Dir("../..").abspath
+api_version = "4.7"
+Export("api_version")
+env = SConscript(os.path.join(root, "SConstruct"))
+out = "project/bin/" + env["arch"]
+
+# Dependencies deliberately do not link godot-cpp or inherit symbol hiding.
+deps = Environment(tools=["default"], ENV=env["ENV"])
+for key in ("CC", "CXX", "AR", "RANLIB"):
+    deps[key] = env[key]
+deps.Append(CCFLAGS=["-fPIC"], LINKFLAGS=["-Wl,--enable-new-dtags", "-Wl,-rpath,'$$ORIGIN'"])
+if env.get("aurora_sysroot"):
+    flag = "--sysroot=" + env["aurora_sysroot"]
+    deps.Append(CCFLAGS=[flag], LINKFLAGS=[flag])
+leaf = deps.SharedLibrary(
+    out + "/aurora_probe_leaf",
+    [deps.SharedObject(out + "/obj/leaf", "leaf.cpp")],
+    LINKFLAGS=deps["LINKFLAGS"] + ["-Wl,-soname,libaurora_probe_leaf.so"],
+)
+middle_env = deps.Clone()
+middle_env.Append(LIBPATH=[out], LIBS=["aurora_probe_leaf"])
+middle = middle_env.SharedLibrary(
+    out + "/aurora_probe_middle",
+    [middle_env.SharedObject(out + "/obj/middle", "middle.cpp")],
+    LINKFLAGS=deps["LINKFLAGS"] + ["-Wl,-soname,libaurora_probe_middle.so"],
+)
+Depends(middle, leaf)
+env.Append(LIBPATH=[out], LIBS=["aurora_probe_middle"])
+if env["platform"] != "auroraos":
+    env.Append(LINKFLAGS=["-Wl,--enable-new-dtags", "-Wl,-rpath,'$$ORIGIN'"])
+extension = env.SharedLibrary(out + "/aurora_probe", [env.SharedObject(out + "/obj/extension", "extension.cpp")])
+Depends(extension, middle)
+Default(extension)
