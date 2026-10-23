@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+revision = int(ARGUMENTS.pop("fixture_revision", "1"))
+if revision not in (1, 2):
+    Exit("fixture_revision must be 1 or 2")
+
+# Never truncate mapped code: build variants separately from the live project.
+env = Environment(tools=["default"], use_hot_reload=True)
+env = SConscript("../../SConstruct", {"env": env, "api_version": "4.7"})
+env.Append(CPPDEFINES=[("AURORA_RELOAD_REVISION", revision)])
+out = "bin/" + env["arch"] + "/revision" + str(revision)
+if env["platform"] == "linux":
+    env.Append(LINKFLAGS=["-Wl,--enable-new-dtags", "-Wl,-rpath,'$$ORIGIN'"])
+library = env.SharedLibrary(out + "/aurora_reload", [env.SharedObject(out + "/extension", "extension.cpp")])
+Default(library)

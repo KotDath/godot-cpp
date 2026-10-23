@@ -1,0 +1,3 @@
+project/.aurora-reload-*.json*
+project/*.uid
+desktop-reload-results.json

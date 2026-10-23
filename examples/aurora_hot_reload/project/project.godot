@@ -1,0 +1,10 @@
+config_version=5
+
+[application]
+config/name="Aurora hot reload smoke"
+
+[editor_plugins]
+enabled=PackedStringArray("res://addons/reload_smoke/plugin.cfg")
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

@@ -1,0 +1,9 @@
+[configuration]
+entry_symbol="aurora_reload_init"
+compatibility_minimum="4.7"
+reloadable=true
+
+[libraries]
+linux.x86_64="res://bin/x86_64/libaurora_reload.so"
+auroraos.arm64="res://bin/arm64/libaurora_reload.so"
+auroraos.arm32="res://bin/arm32/libaurora_reload.so"
