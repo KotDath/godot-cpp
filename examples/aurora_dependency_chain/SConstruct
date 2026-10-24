@@ -12,6 +12,8 @@ deps = Environment(tools=["default"], ENV=env["ENV"])
 for key in ("CC", "CXX", "AR", "RANLIB"):
     deps[key] = env[key]
 deps.Append(CCFLAGS=["-fPIC"], LINKFLAGS=["-Wl,--enable-new-dtags", "-Wl,-rpath,'$$ORIGIN'"])
+if env["debug_symbols"]:
+    deps.Append(CCFLAGS=["-g"])
 if env.get("aurora_sysroot"):
     flag = "--sysroot=" + env["aurora_sysroot"]
     deps.Append(CCFLAGS=[flag], LINKFLAGS=[flag])

@@ -4,6 +4,9 @@
 The project also displays a rotating GLES cube and a touch counter.
 API version is 4.7. Build both target architectures separately; object and DSO
 paths are architecture-specific. Each DSO has its own `$ORIGIN` RUNPATH.
+For native debugging pass `debug_symbols=yes`: SCons then includes symbols in
+the extension and both private dependencies. CMake Debug supplies them for all
+three targets. Keep source/binary identities with the matching SDK sysroot.
 
 From this directory, inside the selected SDK/SB2 target:
 
